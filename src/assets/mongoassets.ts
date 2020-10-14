@@ -1,0 +1,1 @@
+export const mongoConnectionUri: string = "mongodb+srv://QuickPassBoys:bigchungus123@cluster0.jsf18.mongodb.net/QuickPass?retryWrites=true&w=majority";
