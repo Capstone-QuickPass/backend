@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import { mongoConnectionUri } from "./assets/mongoassets";
 
 const app = express();
 const port: number = 8080; // default port to listen
 
-const uri: string = "mongodb+srv://QuickPassBoys:bigchungus123@cluster0.jsf18.mongodb.net/QuickPass?retryWrites=true&w=majority";
+const uri: string = mongoConnectionUri;
 
 mongoose.connect(uri, {
     useNewUrlParser: true,
