@@ -1,8 +1,7 @@
 import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
-
-const user = mongoose.Schema({
+const user = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
     name: {
         firstName: {
