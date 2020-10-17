@@ -1,15 +1,24 @@
 import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
-
-const facility = mongoose.Schema({
+const facility = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
+    key: {
+        type: Schema.Types.Number,
+        required: true,
+        validate: {
+            validator(num: Schema.Types.Number) {
+                return Number.isInteger(num);
+            },
+            message: "Invalid key!"
+        }
+    },
     address: {
         streetNumber: {
             type: Schema.Types.Number,
             required: true,
             validate: {
-                validator: function(num: Schema.Types.Number) {
+                validator(num: Schema.Types.Number) {
                     return Number.isInteger(num);
                 },
                 message: "Invalid street number!"
@@ -18,7 +27,7 @@ const facility = mongoose.Schema({
         unitNumber:  {
             type: Schema.Types.Number,
             validate: {
-                validator: function(num: Schema.Types.Number) {
+                validator(num: Schema.Types.Number) {
                     return Number.isInteger(num);
                 },
                 message: "Invalid unit number!"
@@ -30,14 +39,7 @@ const facility = mongoose.Schema({
         },
         postalCode: {
             type: Schema.Types.String,
-            required: true,
-            validate: {
-                validator: function(text: Schema.Types.String) {
-                    const str: String = new String(text);
-                    return str.length === 6 || str.length === 7;
-                },
-                message: "Invalid postal code!"
-            }
+            required: true
         },
         province: {
             type: Schema.Types.String,
@@ -71,7 +73,7 @@ const facility = mongoose.Schema({
     capacity: {
         type: Schema.Types.Number,
         validate: {
-            validator: function(num: Schema.Types.Number) {
+            validator(num: Schema.Types.Number) {
                 return Number.isInteger(num);
             },
             message: "Invalid capacity number!"
@@ -81,7 +83,7 @@ const facility = mongoose.Schema({
         type: Schema.Types.Number,
         required: true,
         validate: {
-            validator: function(num: Schema.Types.Number) {
+            validator(num: Schema.Types.Number) {
                 return Number.isInteger(num);
             },
             message: "Invalid capacity number!"
