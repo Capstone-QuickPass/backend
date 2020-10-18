@@ -26,9 +26,14 @@ app.get( "/", ( req, res ) => {
 app.get("/personlist", (req, res) => {
     Midterm.find({}, function(err, result) {
         if (err) {
-          throw err;
-        } else {
-          res.json(result);
+            throw err;
+        }
+        else {
+            const resBody = {
+                personList: result,
+                personListSize: result.length
+            };
+            res.json(resBody);
         }
       });
 })
