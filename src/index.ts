@@ -1,8 +1,11 @@
 /* tslint:disable */
 import express from "express";
 import mongoose from "mongoose";
+import BunyanLogger from "./utils/logger";
 import { mongoConnectionUri } from "./assets/mongoassets";
 import { Midterm } from "./model/model";
+
+const addRequestId = require('express-request-id');
 
 const app = express();
 const port: number = 8080; // default port to listen
@@ -17,6 +20,11 @@ mongoose.connect(uri, {
 }).then(() => {
     console.log("MongoDB Connected!");
 }).catch((err: any) => console.log(err));
+
+// adds unique request id to each request for debugging
+app.use(addRequestId);
+// logging tool
+app.use(BunyanLogger);
 
 // define a route handler for the default home page
 app.get( "/", ( req, res ) => {
