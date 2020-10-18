@@ -2,18 +2,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { mongoConnectionUri } from "./assets/mongoassets";
-
-
-const midterm = new mongoose.Schema({
-    time: {
-        type: mongoose.Schema.Types.String
-        },
-    score: {
-        type: mongoose.Schema.Types.String
-        },
-});
-
-const Midterm = mongoose.model('Midterm', midterm);
+import { Midterm } from "./model/model";
 
 const app = express();
 const port: number = 8080; // default port to listen
@@ -33,6 +22,16 @@ mongoose.connect(uri, {
 app.get( "/", ( req, res ) => {
     res.send( "Hello world!" );
 } );
+
+app.get("/personlist", (req, res) => {
+    Midterm.find({}, function(err, result) {
+        if (err) {
+          throw err;
+        } else {
+          res.json(result);
+        }
+      });
+})
 
 app.post( "/newPerson", ( req, res ) => {
     console.log(req.body)
