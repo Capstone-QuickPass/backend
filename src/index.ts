@@ -6,8 +6,9 @@ import { Midterm } from "./model/model";
 
 const app = express();
 const port: number = 8080; // default port to listen
-app.use(express.json())
-app.use(express.urlencoded({extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(require('cors'));
 
 const uri: string = mongoConnectionUri;
 
