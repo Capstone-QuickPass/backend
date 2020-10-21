@@ -5,15 +5,13 @@ import { mongoConnectionUri } from "./assets/mongoassets";
 import { Midterm } from "./model/model";
 
 const cors = require('cors');
-const corsOptions = {
-    origin: 'http://localhost:3003'
-};
+
 
 const app = express();
 const port: number = 8080; // default port to listen
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(corsOptions));
+app.use(cors());
 
 const uri: string = mongoConnectionUri;
 
