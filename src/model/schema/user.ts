@@ -5,18 +5,15 @@ const user = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
     name: {
         firstName: {
-            type: Schema.Types.String,
-            required: true
+            type: Schema.Types.String
         },
         lastName: Schema.Types.String
     },
     isEmployee: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     isAdmin: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     facility: {
         type: Schema.Types.ObjectId,

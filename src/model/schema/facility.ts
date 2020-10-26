@@ -5,7 +5,6 @@ const facility = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
     key: {
         type: Schema.Types.Number,
-        required: true,
         validate: {
             validator(num: Schema.Types.Number) {
                 return Number.isInteger(num);
@@ -16,7 +15,6 @@ const facility = new mongoose.Schema({
     address: {
         streetNumber: {
             type: Schema.Types.Number,
-            required: true,
             validate: {
                 validator(num: Schema.Types.Number) {
                     return Number.isInteger(num);
@@ -34,41 +32,32 @@ const facility = new mongoose.Schema({
             }
         },
         streetName: {
-            type: Schema.Types.String,
-            required: true
+            type: Schema.Types.String
         },
         postalCode: {
-            type: Schema.Types.String,
-            required: true
+            type: Schema.Types.String
         },
         province: {
-            type: Schema.Types.String,
-            required: true
+            type: Schema.Types.String
         },
         country: {
-            type: Schema.Types.String,
-            required: true
+            type: Schema.Types.String
         }
     },
     isCapacitySet: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     isValidatingQR: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     isValidatingMask: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     isValidatingTemperature: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     isValidatingCovidApp: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     capacity: {
         type: Schema.Types.Number,
@@ -81,7 +70,6 @@ const facility = new mongoose.Schema({
     },
     currentCapacity: {
         type: Schema.Types.Number,
-        required: true,
         validate: {
             validator(num: Schema.Types.Number) {
                 return Number.isInteger(num);
@@ -93,12 +81,10 @@ const facility = new mongoose.Schema({
         {
             employee: {
                 type: Schema.Types.ObjectId,
-                ref: 'User',
-                required: true
+                ref: 'User'
             },
             isAdmin: {
-                type: Schema.Types.Boolean,
-                required: true
+                type: Schema.Types.Boolean
             }
         }
     ]
