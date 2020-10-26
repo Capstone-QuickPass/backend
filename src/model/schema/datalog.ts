@@ -13,27 +13,23 @@ const dataLog = new mongoose.Schema({
     },
     person: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     },
     facility: {
         type: Schema.Types.ObjectId,
         ref: 'Facility'
     },
     isQRAuth: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     isMasked: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     },
     temperature: {
         type: Schema.Types.Number
     },
     isCovidAppTraced: {
-        type: Schema.Types.Boolean,
-        required: true
+        type: Schema.Types.Boolean
     }
 }, { timestamps: true });
 
