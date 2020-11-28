@@ -2,7 +2,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { mongoConnectionUri } from "./assets/mongoassets";
-import { Midterm } from "./model/model";
+import { DataLog, Facility, Midterm, User } from "./model/model";
 
 const cors = require('cors');
 
@@ -25,8 +25,11 @@ mongoose.connect(uri, {
 // define a route handler for the default home page
 app.get( "/", ( req, res ) => {
     res.send( "Hello world!" );
-} );
+});
 
+/*
+*   Get list of data logs (midterm)
+*/
 app.get("/personlist", (req, res) => {
     Midterm.find({}, function(err, result) {
         if (err) {
@@ -42,17 +45,91 @@ app.get("/personlist", (req, res) => {
       });
 })
 
+/*
+*   Create a data log (midterm)
+*/
 app.post( "/newPerson", ( req, res ) => {
-    console.log(req.body)
     const mid = new Midterm(req.body)
     mid.save(function(err){
         if (err) {
             throw err;
         }
-        console.log('INSERTED!');
     });
     return res.send(mid._id)
-} );
+});
+
+/*
+*   Get a facility by facility id
+*/
+app.get("/facility/:id", (req, res) => {
+    Facility.findOne({ _id: req.params.id }, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
+/*
+*   Create a facility
+*/
+app.get("/facility/new", (req, res) => {
+    const newFacility = new Facility(req.body);
+    newFacility.save((err) => {
+        if (err) throw err;
+    });
+    return res.send(newFacility._id);
+});
+
+/*
+*   Get a user by user id
+*/
+app.get("/user/:id", (req, res) => {
+    User.findOne({ _id: req.params.id }, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
+/*
+*   Create a new user
+*/
+app.get("/user/new", (req, res) => {
+    const newUser = new User(req.body);
+    newUser.save((err) => {
+        if (err) throw err;
+    });
+    return res.send(newUser._id);
+});
+
+/*
+*   Get a data log by data log id
+*/
+app.get("/datalog/by/id/:id", (req, res) => {
+    DataLog.findOne({ _id: req.params.id }, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
+/*
+*   Get a list of data log by facility id
+*/
+app.get("/datalog/by/facility/:facilityId", (req, res) => {
+    DataLog.find({ facility: req.params.facilityId }, (err, result) => {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
+/*
+*   Create a data log
+*/
+app.get("/datalog/new", (req, res) => {
+    const newDataLog = new DataLog(req.body);
+    newDataLog.save((err) => {
+        if (err) throw err;
+    });
+    return res.send(newDataLog._id);
+});
 
 // start the Express server
 app.listen( port, () => {
