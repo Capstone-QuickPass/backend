@@ -3,11 +3,14 @@ import mongoose from "mongoose";
 
 const user = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
+    email: {
+        type: Schema.Types.String
+    },
     name: {
-        firstName: {
-            type: Schema.Types.String
-        },
-        lastName: Schema.Types.String
+        type: Schema.Types.String
+    },
+    password: {
+        type: Schema.Types.String
     },
     isEmployee: {
         type: Schema.Types.Boolean

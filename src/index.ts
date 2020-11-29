@@ -90,15 +90,49 @@ app.get("/user/:id", (req, res) => {
 });
 
 /*
+*   Get a user by user id
+*/
+app.get("/userList", (req, res) => {
+    User.find({}, function(err, result) {
+        if (err) {
+            throw err;
+        }
+        else {
+            const resBody = {
+                userList: result
+            };
+            res.json(resBody);
+        }
+      });
+})
+
+/*
 *   Create a new user
 */
-app.get("/user/new", (req, res) => {
+app.post("/user/new", (req, res) => {
     const newUser = new User(req.body);
     newUser.save((err) => {
         if (err) throw err;
     });
     return res.send(newUser._id);
 });
+
+/*
+*   Get User List
+*/
+app.get("/userList", (req, res) => {
+    User.find({}, function(err, result) {
+        if (err) {
+            throw err;
+        }
+        else {
+            const resBody = {
+                userList: result
+            };
+            res.json(resBody);
+        }
+      });
+})
 
 /*
 *   Get a data log by data log id
