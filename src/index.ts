@@ -2,16 +2,20 @@
 import express from "express";
 import mongoose from "mongoose";
 import { mongoConnectionUri } from "./assets/mongoassets";
-import { DataLog, Facility, Midterm, User } from "./model/model";
+
+import { DataLog, Facility, Person, User } from "./model/model";
+
 
 const cors = require('cors');
 
 
 const app = express();
 const port: number = 8080; // default port to listen
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: "100mb"}));
+app.use(bodyParser.urlencoded({limit: "100mb", extended: true, parameterLimit:5000000}));
 
 const uri: string = mongoConnectionUri;
 
@@ -31,7 +35,7 @@ app.get( "/", ( req, res ) => {
 *   Get list of data logs (midterm)
 */
 app.get("/personlist", (req, res) => {
-    Midterm.find({}, function(err, result) {
+    Person.find({}, function(err, result) {
         if (err) {
             throw err;
         }
@@ -49,7 +53,10 @@ app.get("/personlist", (req, res) => {
 *   Create a data log (midterm)
 */
 app.post( "/newPerson", ( req, res ) => {
-    const mid = new Midterm(req.body)
+
+    console.log(req.body)
+    const mid = new Person(req.body)
+
     mid.save(function(err){
         if (err) {
             throw err;
