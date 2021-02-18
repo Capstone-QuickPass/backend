@@ -19,7 +19,6 @@ FacilityRouter.get(ID, (req, res) => {
 *   Create a facility
 */
 FacilityRouter.post(NEW, (req, res) => {
-
     try {
         const newFacility = new Facility(req.body);
         newFacility.save();
@@ -28,7 +27,24 @@ FacilityRouter.post(NEW, (req, res) => {
     catch (error) {
         return res.status(400).json({ output: "fail", error });
     }
+});
 
+/*
+*   Update existing facility
+*/
+FacilityRouter.patch(ID, (req, res) => {
+    try {
+        Facility.findByIdAndUpdate(req.params.id, req.body, function (err, model) { })
+            .then((updatedFacility) => {
+                res.status(200).json({ output: "success", facility: updatedFacility });
+            })
+            .catch((error) => {
+                res.status(400).json({ error: "id or data not appropriately provided." });
+            });
+    }
+    catch (error) {
+        return res.status(400).json({ output: "fail", error });
+    }
 });
 
 export default FacilityRouter;
