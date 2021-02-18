@@ -19,11 +19,16 @@ FacilityRouter.get(ID, (req, res) => {
 *   Create a facility
 */
 FacilityRouter.post(NEW, (req, res) => {
-    const newFacility = new Facility(req.body);
-    newFacility.save((err) => {
-        if (err) throw err;
-    });
-    return res.send(newFacility._id);
+
+    try {
+        const newFacility = new Facility(req.body);
+        newFacility.save();
+        return res.status(201).json({ output: "success", newFacility });
+    }
+    catch (error) {
+        return res.status(400).json({ output: "fail", error });
+    }
+
 });
 
 export default FacilityRouter;
