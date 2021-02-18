@@ -29,7 +29,7 @@ UserRouter.post(NEW, (req, res) => {
 *   Get User List
 */
 UserRouter.get(LIST, (req, res) => {
-    User.find({}, function (err, result) {
+    User.find({}, (err, result) =>{
         if (err) {
             throw err;
         }
