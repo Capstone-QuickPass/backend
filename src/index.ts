@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { mongoConnectionUri } from "./assets/mongoassets";
 
 import { DataLog, Facility, Person, User } from "./model/model";
+import { DatalogRouter, FacilityRouter, MAIN_STRINGS, UserRouter } from "./routes";
 
 
 const cors = require('cors');
@@ -31,10 +32,19 @@ app.get( "/", ( req, res ) => {
     res.send( "Hello world!" );
 });
 
+// using router for all facility endpoints
+app.use(MAIN_STRINGS.FACILITY, FacilityRouter);
+
+// using router for all user endpoints
+app.use(MAIN_STRINGS.USER, UserRouter);
+
+// using router for all datalog endpoints
+app.use(MAIN_STRINGS.DATALOG, DatalogRouter);
+
 /*
 *   Get list of data logs (midterm)
 */
-app.get("/personlist", (req, res) => {
+app.get(MAIN_STRINGS.PERSONLIST, (req, res) => {
     Person.find({}, function(err, result) {
         if (err) {
             throw err;
@@ -52,7 +62,7 @@ app.get("/personlist", (req, res) => {
 /*
 *   Create a data log (midterm)
 */
-app.post( "/newPerson", ( req, res ) => {
+app.post( MAIN_STRINGS.NEWPERSON, ( req, res ) => {
 
     console.log(req.body)
     const mid = new Person(req.body)
@@ -66,69 +76,10 @@ app.post( "/newPerson", ( req, res ) => {
 });
 
 /*
-*   Get a facility by facility id
-*/
-app.get("/facility/:id", (req, res) => {
-    Facility.findOne({ _id: req.params.id }, (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-});
-
-/*
-*   Create a facility
-*/
-app.get("/facility/new", (req, res) => {
-    const newFacility = new Facility(req.body);
-    newFacility.save((err) => {
-        if (err) throw err;
-    });
-    return res.send(newFacility._id);
-});
-
-/*
-*   Get a user by user id
-*/
-app.get("/user/:id", (req, res) => {
-    User.findOne({ _id: req.params.id }, (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-});
-
-/*
-*   Get a user by user id
-*/
-app.get("/userList", (req, res) => {
-    User.find({}, function(err, result) {
-        if (err) {
-            throw err;
-        }
-        else {
-            const resBody = {
-                userList: result
-            };
-            res.json(resBody);
-        }
-      });
-})
-
-/*
-*   Create a new user
-*/
-app.post("/user/new", (req, res) => {
-    const newUser = new User(req.body);
-    newUser.save((err) => {
-        if (err) throw err;
-    });
-    return res.send(newUser._id);
-});
-
-/*
 *   Get User List
 */
-app.get("/userList", (req, res) => {
-    User.find({}, function(err, result) {
+app.get(MAIN_STRINGS.USERLIST, (req, res) => {
+    User.find({}, function (err, result) {
         if (err) {
             throw err;
         }
@@ -138,38 +89,7 @@ app.get("/userList", (req, res) => {
             };
             res.json(resBody);
         }
-      });
-})
-
-/*
-*   Get a data log by data log id
-*/
-app.get("/datalog/by/id/:id", (req, res) => {
-    DataLog.findOne({ _id: req.params.id }, (err, result) => {
-        if (err) throw err;
-        res.json(result);
     });
-});
-
-/*
-*   Get a list of data log by facility id
-*/
-app.get("/datalog/by/facility/:facilityId", (req, res) => {
-    DataLog.find({ facility: req.params.facilityId }, (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-});
-
-/*
-*   Create a data log
-*/
-app.get("/datalog/new", (req, res) => {
-    const newDataLog = new DataLog(req.body);
-    newDataLog.save((err) => {
-        if (err) throw err;
-    });
-    return res.send(newDataLog._id);
 });
 
 // start the Express server
