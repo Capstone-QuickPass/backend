@@ -2,7 +2,6 @@ import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
 const facility = new mongoose.Schema({
-    _id: Schema.Types.ObjectId,
     key: {
         type: Schema.Types.Number,
         validate: {
