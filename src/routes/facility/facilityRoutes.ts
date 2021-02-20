@@ -34,7 +34,7 @@ FacilityRouter.post(NEW, (req, res) => {
 */
 FacilityRouter.patch(ID, (req, res) => {
     try {
-        Facility.findByIdAndUpdate(req.params.id, req.body, function (err, model) { })
+        Facility.findByIdAndUpdate(req.params.id, req.body)
             .then((updatedFacility) => {
                 res.status(200).json({ output: "success", facility: updatedFacility });
             })
