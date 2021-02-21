@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { Facility } from "../../model/model";
-import { ID, NEW } from "../routeStrings";
+import { ID, NEW } from "../RouteStrings";
 
 const FacilityRouter = Router();
 
@@ -9,7 +9,7 @@ const FacilityRouter = Router();
 *   Get a facility by facility id
 */
 FacilityRouter.get(ID, (req, res) => {
-    Facility.findOne({ _id: req.params.id }, (err, result) => {
+    Facility.findOne({ _id: req.params.id }, (err: any, result: Document) => {
         if (err) throw err;
         res.json(result);
     });

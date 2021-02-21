@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { User } from "../../model/model";
-import { ID, LIST, NEW } from "../routeStrings";
+import { ID, LIST, NEW } from "../RouteStrings";
 
 const UserRouter = Router();
 
@@ -8,7 +8,7 @@ const UserRouter = Router();
 *   Get a user by user id
 */
 UserRouter.get(ID, (req, res) => {
-    User.findOne({ _id: req.params.id }, (err, result) => {
+    User.findOne({ _id: req.params.id }, (err: any, result: Document) => {
         if (err) throw err;
         res.json(result);
     });
