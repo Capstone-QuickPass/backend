@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { DataLog } from "../../model/model";
-import { DATALOG_BY_FACILITY, DATALOG_BY_ID, NEW } from "../routeStrings";
+import { DATALOG_BY_FACILITY, DATALOG_BY_ID, NEW } from "../RouteStrings";
 
 const DatalogRouter = Router();
 
@@ -8,7 +8,7 @@ const DatalogRouter = Router();
 *   Get a data log by data log id
 */
 DatalogRouter.get(DATALOG_BY_ID, (req, res) => {
-    DataLog.findOne({ _id: req.params.id }, (err, result) => {
+    DataLog.findOne({ _id: req.params.id }, (err: any, result: Document) => {
         if (err) throw err;
         res.json(result);
     });
