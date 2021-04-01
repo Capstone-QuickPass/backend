@@ -11,9 +11,18 @@ const person = new mongoose.Schema({
     mask_status: {
             type: mongoose.Schema.Types.String
             },
-    photo: {
+    thermalPhoto: {
         type: mongoose.Schema.Types.Array
         },
+    individualPhoto: {
+            type: mongoose.Schema.Types.Array
+        },
+    tempVulnerable: {
+        type: mongoose.Schema.Types.Boolean
+        },
+    tempValue: {
+            type: mongoose.Schema.Types.Boolean
+            },
 
 });
 

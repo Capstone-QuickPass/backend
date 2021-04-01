@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { mongoConnectionUri } from "./assets/mongoassets";
 
-import { DataLog, Facility, Person, User } from "./model/model";
+import { DataLog, Facility, Person, User, Alert} from "./model/model";
 import { DatalogRouter, FacilityRouter, MAIN_STRINGS, UserRouter } from "./routes";
 
 
@@ -92,6 +92,22 @@ app.get(MAIN_STRINGS.USERLIST, (req, res) => {
         }
     });
 });
+
+app.get(MAIN_STRINGS.ALERTLIST, (req, res) => {
+    Alert.find({}, function(err, result) {
+        if (err) {
+            throw err;
+        }
+        else {
+            const resBody = {
+                alertList: result,
+                alertListSize: result.length
+            };
+            res.json(resBody);
+        }
+      });
+})
+
 
 // start the Express server
 app.listen( port, () => {

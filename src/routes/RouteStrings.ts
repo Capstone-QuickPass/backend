@@ -15,5 +15,6 @@ export const DATALOG_BY_FACILITY = BY + "/facility/:facility";
 const PERSONLIST = "/personlist";
 const NEWPERSON = "/newPerson";
 const USERLIST = "/userList";
+const ALERTLIST = "/alertList";
 
-export const MAIN_STRINGS = { FACILITY, USER, DATALOG, PERSONLIST, NEWPERSON, USERLIST};
+export const MAIN_STRINGS = { FACILITY, USER, DATALOG, PERSONLIST, NEWPERSON, USERLIST, ALERTLIST};
