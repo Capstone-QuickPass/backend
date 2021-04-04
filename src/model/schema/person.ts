@@ -1,7 +1,8 @@
-import { Schema } from "mongoose";
-import mongoose from "mongoose";
+import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 const person = new mongoose.Schema({
+
     time: {
         type: mongoose.Schema.Types.String
         },
@@ -24,6 +25,11 @@ const person = new mongoose.Schema({
             type: mongoose.Schema.Types.Boolean
             },
 
+});
+
+
+person.set('toJSON', {
+	virtuals: true,
 });
 
 export default person;
