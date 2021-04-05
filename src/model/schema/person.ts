@@ -23,6 +23,9 @@ const person = new mongoose.Schema({
     tempValue: {
             type: mongoose.Schema.Types.Boolean
             },
+    datetime: {
+            type: mongoose.Schema.Types.Boolean
+        },
 
 });
 
